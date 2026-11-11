@@ -1,0 +1,160 @@
+/* 3D birthday book — CSS transforms + Framer Motion drive the flips */
+
+.book-scene {
+  perspective: 1600px;
+  perspective-origin: 50% 50%;
+}
+
+.book-shell {
+  position: relative;
+  transform-style: preserve-3d;
+  width: min(92vw, 420px);
+  aspect-ratio: 3 / 4.2;
+}
+
+@media (min-width: 640px) {
+  .book-shell {
+    width: min(88vw, 460px);
+  }
+}
+
+.book-cover,
+.book-page-face {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 2px 10px 10px 2px;
+}
+
+.book-cover {
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(232, 160, 176, 0.22), transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(201, 169, 110, 0.18), transparent 45%),
+    linear-gradient(145deg, #5c1f2e 0%, #3a1520 55%, #2a1218 100%);
+  box-shadow:
+    0 25px 50px -12px rgba(42, 18, 24, 0.55),
+    inset 0 0 0 1px rgba(232, 213, 168, 0.28),
+    inset 8px 0 16px rgba(0, 0, 0, 0.25);
+}
+
+.book-cover-inner {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 10px 2px 2px 10px;
+  background: linear-gradient(180deg, #faf6f0, #f3ebe1);
+  box-shadow: inset -6px 0 14px rgba(42, 18, 24, 0.08);
+}
+
+.book-spine-shadow {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 14px;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.28), transparent);
+  border-radius: 2px 0 0 2px;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.book-page-stack {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.book-page-face {
+  background:
+    radial-gradient(circle at 18% 22%, rgba(232, 160, 176, 0.07), transparent 40%),
+    radial-gradient(circle at 82% 78%, rgba(201, 169, 110, 0.06), transparent 36%),
+    linear-gradient(180deg, #faf6f0, #f5eee4);
+  box-shadow:
+    0 18px 40px -16px rgba(42, 18, 24, 0.35),
+    inset 0 0 0 1px rgba(201, 169, 110, 0.22);
+  overflow: hidden;
+}
+
+.book-page-face.graduation {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(232, 213, 168, 0.22), transparent 45%),
+    radial-gradient(circle at 20% 80%, rgba(216, 204, 232, 0.16), transparent 40%),
+    linear-gradient(180deg, #fbf8f2, #f1e8db);
+}
+
+.book-page-content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  padding: clamp(1.25rem, 4vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.book-ornament {
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(201, 169, 110, 0.35);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.book-ornament::before,
+.book-ornament::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 1px solid rgba(232, 160, 176, 0.55);
+}
+
+.book-ornament::before {
+  top: 6px;
+  left: 6px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.book-ornament::after {
+  right: 6px;
+  bottom: 6px;
+  border-left: none;
+  border-top: none;
+}
+
+.floral-corner {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.floral-corner.tl {
+  top: 10px;
+  left: 10px;
+}
+
+.floral-corner.tr {
+  top: 10px;
+  right: 10px;
+  transform: scaleX(-1);
+}
+
+.floral-corner.br {
+  bottom: 10px;
+  right: 10px;
+  transform: scale(-1);
+}
+
+.floral-corner.bl {
+  bottom: 10px;
+  left: 10px;
+  transform: scaleY(-1);
+}

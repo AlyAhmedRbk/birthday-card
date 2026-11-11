@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html,
+  body,
+  #root {
+    min-height: 100%;
+  }
+
+  body {
+    margin: 0;
+    font-family: theme('fontFamily.ui');
+    color: theme('colors.ink.DEFAULT');
+    background: theme('colors.burgundy.deep');
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  button {
+    font-family: inherit;
+  }
+
+  :focus-visible {
+    outline: 2px solid theme('colors.champagne.deep');
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .bg-romantic-glow {
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 20%, rgba(232, 160, 176, 0.28), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 80%, rgba(201, 169, 110, 0.18), transparent 55%),
+      radial-gradient(ellipse 50% 40% at 15% 70%, rgba(216, 204, 232, 0.16), transparent 50%),
+      linear-gradient(160deg, #2a1218 0%, #5c1f2e 45%, #3a1824 100%);
+  }
+
+  .bg-paper {
+    background-color: theme('colors.ivory');
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(232, 160, 176, 0.08), transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(201, 169, 110, 0.07), transparent 35%),
+      linear-gradient(180deg, rgba(250, 246, 240, 0.95), rgba(243, 235, 225, 0.98));
+  }
+
+  .paper-texture {
+    position: relative;
+  }
+
+  .paper-texture::after {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    opacity: 0.35;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply rounded-full bg-gradient-to-r from-rose to-rose-deep px-8 py-3.5 font-ui text-sm font-medium tracking-wide text-ivory shadow-glow-rose transition hover:brightness-110 active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply rounded-full border border-champagne/50 bg-champagne/10 px-6 py-3 font-ui text-sm text-champagne transition hover:bg-champagne/20;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
